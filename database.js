@@ -1,34 +1,30 @@
 const sqlite3 = require('sqlite3').verbose();
-
+const data = require('./database_insert_data.json');
 // open the database
-let db = new sqlite3.Database('mybooks.db', (err) => {
+const db = new sqlite3.Database('medical_data.db', function (err) {
     if (err) {
-      console.error(err.message);
-      throw err
+        console.error(err.message);
+        throw err
+    } else console.log('Connected to the medical_data database.');
+});
+
+db.serialize(() => {
+    for (const [key, values] of Object.entries(data)) {
+        db.run(values[0], function (err) {
+                if (err) {
+                    console.error(err)
+                } else {
+                    console.log(`${key} table created`);
+                }
+            }
+        ).run(`INSERT INTO ${key} (${values[1]}) VALUES${values[2].map(row => `(${row.map(()=>'?').join(',')})`).join(',')}`, values[2].flat(), function (err) {
+            if (err) {
+                console.error(`INSERT INTO ${key} (${values[1]}) VALUES${values[2].map(row => `(${row.map(()=>'?').join(',')})`).join(',')}`, values[2].flat(), err)
+            } else {
+                console.log('data added')
+            }
+        })
     }
-    else
-        console.log('Connected to the mybooks database.');
-  });
-
-
-// create table 'book'
-const sql='CREATE TABLE book(name text)';
-  db.run(sql, (err) => {
-    if (err) {
-        // Table already created
-        console.log('Table already created.');
-    }else{
-      console.log('Table created.');
-      
-      // First time Table created, insert some rows
-      console.log('First time Table created, creating some rows.');
-      
-      var insert = 'INSERT INTO book(name) VALUES(?)';
-      db.run(insert, ['JavaScript Programming']);
-      db.run(insert, ['React with Hooks']);
-    }
-  });
-
-
+})
 // export as module, called db
 module.exports = db

@@ -1,0 +1,102 @@
+{
+  "patients": [
+    "CREATE TABLE patients(patient_id INTEGER PRIMARY KEY NOT NULL, first_name STRING, surname STRING, gender STRING, age INTEGER)",
+    [
+      "patient_id",
+      "first_name",
+      "surname",
+      "gender",
+      "age"
+    ],
+    [
+      [
+        1,
+        "Howard",
+        "Ramsey",
+        "Male",
+        6
+      ],
+      [
+        2,
+        "Craig",
+        "Riley",
+        "Male",
+        8
+      ],
+      [
+        3,
+        "Randall",
+        "Fernandez",
+        "Male",
+        2
+      ],
+      [
+        4,
+        "Mia",
+        "Mcfarland",
+        "Female",
+        7
+      ],
+      [
+        5,
+        "Arsenio",
+        "Mcfarland",
+        "Female",
+        6
+      ]
+    ]
+  ],
+  "medical_treatments": [
+    "CREATE TABLE medical_treatments(treatment_id INTEGER PRIMARY KEY NOT NULL, FOREIGN KEY(patient_id) REFERENCES patients(patient_id), type STRING, category STRING, name STRING, start_date STRING)",
+    [
+      "treatment_id",
+      "patient_id",
+      "type",
+      "category",
+      "name",
+      "start_date"
+    ],
+    [
+      [
+        1,
+        1,
+        "cosmetic",
+        "face",
+        "face lift",
+        "10/10/2021"
+      ],
+      [
+        2,
+        2,
+        "life saving",
+        "body",
+        "face lift",
+        "11/10/2021"
+      ],
+      [
+        3,
+        3,
+        "preventative",
+        "leg",
+        "face lift",
+        "12/10/2021"
+      ],
+      [
+        4,
+        3,
+        "cosmetic",
+        "arm",
+        "face lift",
+        "13/10/2021"
+      ],
+      [
+        5,
+        4,
+        "cosmetic",
+        "body",
+        "face lift",
+        "14/10/2021"
+      ]
+    ]
+  ]
+}
