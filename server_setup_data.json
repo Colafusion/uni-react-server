@@ -1,0 +1,17 @@
+{
+  "patients": [
+    "patient_id",
+    "first_name",
+    "surname",
+    "gender",
+    "age"
+  ],
+  "medical_treatments": [
+    "treatment_id",
+    "patient_id",
+    "type",
+    "category",
+    "name",
+    "start_date"
+  ]
+}

@@ -47,7 +47,7 @@
     ]
   ],
   "medical_treatments": [
-    "CREATE TABLE medical_treatments(treatment_id INTEGER PRIMARY KEY NOT NULL, FOREIGN KEY(patient_id) REFERENCES patients(patient_id), type STRING, category STRING, name STRING, start_date STRING)",
+    "CREATE TABLE medical_treatments(treatment_id INTEGER PRIMARY KEY NOT NULL, patient_id INTEGER NOT NULL REFERENCES patients(patient_id), type STRING, category STRING, name STRING, start_date STRING)",
     [
       "treatment_id",
       "patient_id",
