@@ -1,6 +1,7 @@
 {
   "patients": [
     "patient_id",
+    "allergy_id",
     "first_name",
     "surname",
     "gender",
@@ -9,9 +10,12 @@
   "medical_treatments": [
     "treatment_id",
     "patient_id",
+    "prescription_id",
     "type",
     "category",
     "name",
     "start_date"
-  ]
+  ],
+  "prescriptions": ["prescription_id","repeat","description"],
+  "allergies": ["allergy_id","description"]
 }

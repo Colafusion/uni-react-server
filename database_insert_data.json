@@ -1,8 +1,9 @@
 {
   "patients": [
-    "CREATE TABLE patients(patient_id INTEGER PRIMARY KEY NOT NULL, first_name STRING, surname STRING, gender STRING, age INTEGER)",
+    "CREATE TABLE patients(patient_id INTEGER PRIMARY KEY NOT NULL, allergy_id INTEGER NOT NULL REFERENCES allergies(allergy_id), first_name STRING, surname STRING, gender STRING, age INTEGER)",
     [
       "patient_id",
+      "allergy_id",
       "first_name",
       "surname",
       "gender",
@@ -11,12 +12,14 @@
     [
       [
         1,
+        1,
         "Howard",
         "Ramsey",
         "Male",
         6
       ],
       [
+        2,
         2,
         "Craig",
         "Riley",
@@ -25,6 +28,7 @@
       ],
       [
         3,
+        3,
         "Randall",
         "Fernandez",
         "Male",
@@ -32,6 +36,7 @@
       ],
       [
         4,
+        1,
         "Mia",
         "Mcfarland",
         "Female",
@@ -39,6 +44,7 @@
       ],
       [
         5,
+        1,
         "Arsenio",
         "Mcfarland",
         "Female",
@@ -47,10 +53,11 @@
     ]
   ],
   "medical_treatments": [
-    "CREATE TABLE medical_treatments(treatment_id INTEGER PRIMARY KEY NOT NULL, patient_id INTEGER NOT NULL REFERENCES patients(patient_id), type STRING, category STRING, name STRING, start_date STRING)",
+    "CREATE TABLE medical_treatments(treatment_id INTEGER PRIMARY KEY NOT NULL, patient_id INTEGER NOT NULL REFERENCES patients(patient_id), prescription_id INTEGER NOT NULL REFERENCES prescriptions(prescription_id), type STRING, category STRING, name STRING, start_date STRING)",
     [
       "treatment_id",
       "patient_id",
+      "prescription_id",
       "type",
       "category",
       "name",
@@ -58,6 +65,7 @@
     ],
     [
       [
+        1,
         1,
         1,
         "cosmetic",
@@ -68,12 +76,14 @@
       [
         2,
         2,
+        2,
         "life saving",
         "body",
         "face lift",
         "11/10/2021"
       ],
       [
+        3,
         3,
         3,
         "preventative",
@@ -84,6 +94,7 @@
       [
         4,
         3,
+        1,
         "cosmetic",
         "arm",
         "face lift",
@@ -92,11 +103,29 @@
       [
         5,
         4,
+        1,
         "cosmetic",
         "body",
         "face lift",
         "14/10/2021"
       ]
+    ]
+  ],
+  "prescriptions": [
+    "CREATE TABLE prescriptions(prescription_id INTEGER PRIMARY KEY NOT NULL, repeat STRING, description STRING)",
+    ["prescription_id","repeat","description"],
+    [[1,"N/A","N/A"],
+      [2,"YES","Paracetamol"],
+    [3,"NO","Ibuprofen"]]
+  ],
+  "allergies": [
+    "CREATE TABLE allergies(allergy_id INTEGER PRIMARY KEY NOT NULL, description STRING)",
+    ["allergy_id","description"],
+
+    [
+      [1,"None"],
+      [2,"Hayfever"],
+      [3,"Hayfever - Acute"]
     ]
   ]
 }
